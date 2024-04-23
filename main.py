@@ -6,11 +6,12 @@ import configparser
 
 
 class Application:
-    def __init__(self, vk_user_id, vk_access_token, yandex_access_token, folder_name=datetime.now().date(), count=5,):
+    def __init__(self, vk_user_id, vk_access_token, yandex_access_token):
+        self.count = 5,
+        self.folder_name = datetime.now().date()
         self.yandex_access_token = yandex_access_token
         self.vk_user_id = vk_user_id
         self.vk_access_token = vk_access_token
-        self.count = count
         self.api_server = 'api.vk.com/'
         self.params = {
             'access_token':  self.vk_access_token,
@@ -21,7 +22,6 @@ class Application:
             'v': '5.199',
         }
         self.yandex_api_server = 'https://cloud-api.yandex.net/v1/disk/resources'
-        self.folder_name = folder_name
         self.params_yandex = {
             'path': {self.folder_name}
         }
@@ -63,7 +63,7 @@ class Application:
 
     def __check_download_file(self, json_list, photo_list):
         if len(json_list) == len(photo_list):
-            print('Все файлы успешно загружены')
+            print(f'Все файлы успешно загружены в папку {self.folder_name}')
         else:
             'Не все файлы были загружены'
 
